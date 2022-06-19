@@ -1,6 +1,5 @@
 import React from 'react'
 import Logo from '../assets/logo.efdde25b.png'
-import Bannerimg from '../assets/bg-football.2d1b7b03.jpg'
 const Banner = () => {
   return (
     <div>
