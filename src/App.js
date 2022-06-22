@@ -4,6 +4,7 @@ import Footer from "../src/components/layouts/Footer";
 import Competitions from "./components/pages/Competitions";
 import Home from "./components/pages/Home";
 import { SportifyProvider } from "./components/context/SportifyContext";
+import Matches from "./components/Matches";
 
 function App() {
   return (

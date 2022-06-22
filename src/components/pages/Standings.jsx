@@ -8,7 +8,7 @@ const Standings = () => {
     const [standings,setStandings]=useState([])
     const [loading,setLoading]= useState(true)
    
-    const {FOOTBALL_API_TOKEN,FOOTBALL_API_URL,selectedLeague}= useContext(SportifyContext)
+    const {FOOTBALL_API_TOKEN,FOOTBALL_API_URL,setSelectedLeague,selectedLeague}= useContext(SportifyContext)
     console.log(selectedLeague)
     
 
@@ -47,22 +47,22 @@ const Standings = () => {
           setStandings(data.standings[0].table)
           localStorage.setItem('api_data',data)
         }else{
-          data = JSON.parse(localStorage.getItem('api_data'))
+          const data = JSON.parse(localStorage.getItem('api_data'))
           JSON.stringify(data)
           setStandings(data.standings[0].table)
         }
 
-        // setStandings(data?.standings[0])
-        // console.log(data)
       }
       console.log('standings =========',standings)
     useEffect(()=>{
       setLoading(false)
+      setSelectedLeague(selectedLeague)
       getStanding()
     },[])
 
         const renderer = standings?.map((item)=>(
-          <tbody className=" divide-gray-100 hover:shadow-lg lg:px-4">
+          <tbody className=" divide-gray-100 hover:shadow-lg lg:px-4" key={item.position}>
+            
                   <tr className="border-b">
                     <td className="p-3 text-sm text-gray-700 whitespace-nowrap">
                       <p>{item.position}</p>
@@ -72,6 +72,9 @@ const Standings = () => {
                         <img src={item.team.crest} alt="emblem" /> 
                       </div>
                       <div className="self-center pl-3">
+                      {selectedLeague == 'CL' &&(
+              <p>noodles</p>
+            )}
                         <p className='uppercase'>{item.team.name}</p>
                       </div>
                       

@@ -1,19 +1,19 @@
 import React from 'react'
 import HeadToHead from './HeadToHead'
 import SportifyContext from './context/SportifyContext'
-import { useContext,useState,useEffect } from 'react'
+import { useContext,useEffect } from 'react'
+import Spinner from './Spinner'
 
 const Matches = () => {
-  const {matchday,matches}=useContext(SportifyContext)
-  console.log(matches)
-  console.log(matchday)
-  useEffect(()=>{
-    // getMatches()
-  },[])
-  return (
+  const {matchday,getMatches,Loading}=useContext(SportifyContext)
+
+  // useEffect(()=>{
+  //    getMatches()
+  // },[])
+  return Loading ? <Spinner/>: (
     <>
-    <div className=''>
-      <p>MATCHDAY {matchday}</p>
+    <div className='py-4'>
+      <p>Matchweek {matchday}</p>
       <HeadToHead/>
     </div>
 

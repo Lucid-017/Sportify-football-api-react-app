@@ -1,24 +1,24 @@
 import React from 'react'
-import {useState,useEffect,useContext} from 'react'
+import {useEffect,useContext} from 'react'
 import SportifyContext from './context/SportifyContext'
 import Spinner from './Spinner'
 
 const HeadToHead = () => {
    
-    const {loading,selectedLeague,getMatches,matches}= useContext(SportifyContext)
+    const {loading,setSelectedLeague,selectedLeague,getMatches,matches}= useContext(SportifyContext)
    
     console.log(selectedLeague)
-
    
-   console.log('matches =========',matches)
-   console.log('matches =========',typeof matches)
-   console.log('matches =========',matches.length)
     useEffect(()=>{
+        setSelectedLeague(selectedLeague)
       getMatches()
     },[])
 
-    const render = matches.map((match)=>(
-        <div className="p-5 border-b border-r">
+
+  return loading ? <Spinner/>: (
+    <div className='grid grid-cols-1 lg:grid-cols-2'>
+        {matches.map((match)=>(
+        <div className="p-5 border-b border-r" key={match.id}>
             <div className="flex justify-between relative">
                 <div className="teams">
                     <div className="team1 mb-3">
@@ -64,10 +64,8 @@ const HeadToHead = () => {
             </div>
             
         </div>
-    ))
-  return !loading ? <Spinner/>: (
-    <div className='grid grid-cols-1 lg:grid-cols-2'>
-        {render}
+    ))}
+    
     </div>
   )
 }

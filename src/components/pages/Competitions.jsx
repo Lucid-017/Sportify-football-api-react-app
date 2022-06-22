@@ -16,10 +16,10 @@ const Competitions = () => {
     <div className="">
       <Link to={'/'}>
         <p className='animate p-2'>All Competitions
-           </p> /<span className='text-ash-900'> <></>
-          {LeagueName}</span>
-        
+           </p>  
       </Link>
+      /<span className='text-ash-900'> <></>
+          {LeagueName}</span>
         
        
       </div>
@@ -34,7 +34,7 @@ const Competitions = () => {
           <button style={{borderBottomWidth:  !active ? '4px' : null}} 
           onClick={()=>setActive(false)} className='text-xl pb-3 uppercase cursor-pointer'>matches</button>
       </div>
-      {active ? <Standings/>:<Matches/>}
+      {active ? <Standings/>: <Matches/>}
   </div>
       
     
