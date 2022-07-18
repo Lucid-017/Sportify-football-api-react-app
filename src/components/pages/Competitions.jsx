@@ -22,7 +22,7 @@ const Competitions = () => {
       </div>
 
       <div className="">
-        <p className='capitalize text-2xl text-blue-700 my-3'>
+        <p className='capitalize text-2xl text-blue-700 my-5'>
           {LeagueName}
         </p>
       </div>

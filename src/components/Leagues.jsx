@@ -24,9 +24,10 @@ const Leagues = () => {
     const renderer= competitions.map((competition)=>(
       <Link to={`/competitions/${competition.id}`} key={competition.name}>
         <div className=" h-3/4 " >
-            <div className="cursor-pointer shadow-xl hover:shadow-2xl lg:p-8 md:p-10 p-8 h-40 md:h-40 lg:h-36" >
+            <div className="cursor-pointer shadow-xl hover:shadow-2xl
+             lg:p-8 md:p-10 sm:p-8 p-8 h-34 sm:h-30 md:h-36 lg:h-36" >
          <div className="flex gap-3">
-         <div className="w-24 sm:w-24 md:w-30 lg:w-30  justify-self-center">
+         <div className="w-24 sm:w-24 md:w-30 lg:w-30 self-center md:self-auto lg:self-auto justify-self-center">
            <img className='' src={competition.emblem} alt="emblem" />
          </div>
          <div className="league self-center" onClick={()=>
@@ -35,7 +36,7 @@ const Leagues = () => {
         }>
           
             <p className='text-lg font-medium '>{competition.name}</p>
-            <p className='text-xs'>{competition.area.name}</p>
+            <p className='text-sm lg:text-xs'>{competition.area.name}</p>
           
          </div>
          </div>

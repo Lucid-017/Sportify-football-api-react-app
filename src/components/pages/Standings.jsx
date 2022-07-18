@@ -45,7 +45,7 @@ const Standings = () => {
     },[])
 
         const europe = europestandings.map((item)=>(
-          <div className="rounded custom-shadow mt-5 mb-8 p-5">
+          <div className="rounded custom-shadow mt-5 mb-8 m-5">
           <div className="overflow-x-auto lg:overflow-x-hidden md:overflow-x-hidden overflow-hidden  md:block px-2">
             <table className="w-full ">
               <thead className="border-b border-gray-500  ">
