@@ -45,12 +45,12 @@ const Standings = () => {
     },[])
 
         const europe = europestandings.map((item)=>(
-          <div className="rounded custom-shadow mt-5 mb-8 m-5">
+          <div className="rounded custom-shadow mt-5 mb-8 p-5">
           <div className="overflow-x-auto lg:overflow-x-hidden md:overflow-x-hidden overflow-hidden  md:block px-2">
             <table className="w-full ">
-              <thead className="border-b border-gray-500  ">
+              <thead className="border-b border-gray-500 ">
                 <p className='text-xl pb-10 font-medium'>{item.group}</p>
-                <tr className='text-ash-900 font-semi-bold'>
+                <tr className='text-ash-900 font-semi-bold '>
                   <th className="w-6 text-base  tracking-wide"></th>
                   <th className="w-40 pl-3 text-base font-medium tracking-wide text-left">
                     Team
