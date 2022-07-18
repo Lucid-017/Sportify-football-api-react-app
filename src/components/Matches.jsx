@@ -5,14 +5,15 @@ import { useContext,useEffect } from 'react'
 import Spinner from './Spinner'
 
 const Matches = () => {
-  const {matchday,getMatches,Loading}=useContext(SportifyContext)
+  const {matchday,getMatches,loading,selectedLeague,setSelectedLeague}=useContext(SportifyContext)
 
-  // useEffect(()=>{
-  //    getMatches()
-  // },[])
-  return Loading ? <Spinner/>: (
+   useEffect(()=>{
+    setSelectedLeague(selectedLeague)
+    getMatches()
+},[])
+  return loading ? <Spinner/>: (
     <>
-    <div className='py-4'>
+    <div className='py-4 '>
       <p>Matchweek {matchday}</p>
       <HeadToHead/>
     </div>

@@ -18,20 +18,18 @@ const Competitions = () => {
         <p className='animate p-2'>All Competitions
            </p>  
       </Link>
-      /<span className='text-ash-900'> <></>
-          {LeagueName}</span>
-        
-       
+      /<span className='text-ash-900 px-2'>{LeagueName}</span>
       </div>
+
       <div className="">
         <p className='capitalize text-2xl text-blue-700 my-3'>
           {LeagueName}
         </p>
       </div>
       <div className="tabs text-white flex justify-around mt-5 bg-zest-500 pt-3">
-          <button style={{borderBottomWidth:  active ? '4px' : null}} 
+          <button style={{borderBottomWidth:  active ? '4px' : null,borderColor:'white'}} 
           onClick={()=>setActive(true)} className='text-xl pb-3 uppercase cursor-pointer'>Standings</button>
-          <button style={{borderBottomWidth:  !active ? '4px' : null}} 
+          <button style={{borderBottomWidth:  !active ? '4px' : null,borderColor:'white'}} 
           onClick={()=>setActive(false)} className='text-xl pb-3 uppercase cursor-pointer'>matches</button>
       </div>
       {active ? <Standings/>: <Matches/>}

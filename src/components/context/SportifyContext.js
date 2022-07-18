@@ -15,8 +15,6 @@ export const SportifyProvider = ({children})=>{
     const [competitions,setCompetitions]= useState([])
     const [matchday,setMatchDay]=useState([])
     const [matches,setMatches]=useState([])
-    const [currentMatchday,setCurrentMatchday]=useState([])
-    const zero = 'no matches available'
     const [LeagueName,setSelectedLeagueName]=useState([])
     const area_ids= [2072,2114,2163,2077,2081,2088,2187,2224]
 
@@ -48,32 +46,29 @@ const test = async () =>{
 }
 
 const getMatches= async()=>{
+  setLoading(true)
   const response = await axios.get(`${FOOTBALL_API_URL}/${selectedLeague}/matches`,{
-        method: 'get', 
+        method: 'GET', 
           headers: { 'X-Auth-Token': `${FOOTBALL_API_TOKEN}`}
   } );
     console.log('checking getmatch response',response)
-   const data = await response.data
+   const data = response.data
    console.log('checking response.data',data)
-
-    setLoading(false)
-
-    setMatchDay(data.matches[0].season.currentMatchday)
+  
+   setLoading(false)
+    
+    // set matchday
+    const originmatchday = data.matches[0].season.currentMatchday
+    setMatchDay(originmatchday)
+    // filter matches by matchday
     const filter = data.matches.filter((match)=>{
-     return matchday == match.matchday
+      return  originmatchday === match.matchday
   })
-    console.log('filtered array',filter)
-    // setCurrentMatchday(data.matches[0][0].matchday)
-    // console.log('currentmatchday',currentMatchday)
 
-  //  if(data){
-  //    setMatches(filter)
-  //    localStorage.setItem('api_match',data)
-  //  }else{
-  //    data = JSON.parse(localStorage.getItem('api_match'))
-  //    JSON.stringify(filter)
-  //    setMatches(filter)
-  //  }
+    // log the filtered array
+    console.log('filtered array',filter)
+
+   setMatches(filter)
 
  
  }

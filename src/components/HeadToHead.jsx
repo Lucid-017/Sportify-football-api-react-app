@@ -8,11 +8,6 @@ const HeadToHead = () => {
     const {loading,setSelectedLeague,selectedLeague,getMatches,matches}= useContext(SportifyContext)
    
     console.log(selectedLeague)
-   
-    useEffect(()=>{
-        setSelectedLeague(selectedLeague)
-      getMatches()
-    },[])
 
 
   return loading ? <Spinner/>: (
