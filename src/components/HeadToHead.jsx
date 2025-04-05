@@ -5,7 +5,7 @@ import Spinner from './Spinner'
 
 const HeadToHead = () => {
    
-    const {loading,setSelectedLeague,selectedLeague,getMatches,matches}= useContext(SportifyContext)
+    const {loading,selectedLeague,matches}= useContext(SportifyContext)
    
     console.log(selectedLeague)
 

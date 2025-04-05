@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^13.5.0",
     "assert": "^2.0.0",
     "axios": "^0.27.2",
+    "dotenv": "^16.4.7",
     "fs": "^0.0.1-security",
     "https-browserify": "^1.0.0",
     "os": "^0.1.2",
@@ -25,7 +26,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "dev": "nodemon server.js"
   },
   "eslintConfig": {
     "extends": [
@@ -47,6 +49,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.4.7",
+    "nodemon": "^3.1.9",
     "postcss": "^8.4.14",
     "tailwindcss": "^3.1.3"
   }

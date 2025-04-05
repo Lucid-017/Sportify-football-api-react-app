@@ -13,12 +13,9 @@ const Competitions = () => {
   return (
 
     <div className='md:w-9/12 lg:w-7/12 mx-auto drop-shadow-md p-3 bg-white rounded check'>
-    <div className="">
-      <Link to={'/'}>
-        <p className='animate p-2'>All Competitions
-           </p>  
-      </Link>
-      /<span className='text-ash-900 px-2'>{LeagueName}</span>
+      <div className="">
+        <Link to={'/'}><p className='animate p-2'>All Competitions</p>  </Link>
+        /<span className='text-ash-900 px-2'>{LeagueName}</span>
       </div>
 
       <div className="">
