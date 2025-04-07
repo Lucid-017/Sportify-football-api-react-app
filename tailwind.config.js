@@ -4,6 +4,20 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
+    screens: {
+      'sm': '320px',     // Default small breakpoint
+      'md': '481px',     // Default medium breakpoint
+      'lg': '601px',    // Default large breakpoint
+      'xl': '769px',    // Default extra large breakpoint
+      '2xl': '1025px',   // Default 2x extra large breakpoint
+      
+      // Custom breakpoints
+      'tablet': '640px',
+      'laptop': '1024px',
+      'desktop': '1280px',
+      'mobile': {'max': '639px'}, // Max-width breakpoint
+      'portrait': {'raw': '(orientation: portrait)'}, // Non-width based breakpoint
+    },
     extend: {
       colors:{
         'zest': {
@@ -68,6 +82,7 @@ module.exports = {
   }
       }
     },
+
   },
   plugins: [],
 }

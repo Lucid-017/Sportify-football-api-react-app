@@ -12,13 +12,10 @@ const Competitions = () => {
   const {LeagueName}=useContext(SportifyContext)
   return (
 
-    <div className='md:w-9/12 lg:w-7/12 mx-auto drop-shadow-md p-3 bg-white rounded check'>
-    <div className="">
-      <Link to={'/'}>
-        <p className='animate p-2'>All Competitions
-           </p>  
-      </Link>
-      /<span className='text-ash-900 px-2'>{LeagueName}</span>
+    <div className='p-5 md:px-10 '>
+      <div className="">
+        <Link to={'/'}><p className='animate p-2'>All Competitions</p>  </Link>
+        /<span className='text-ash-900 px-2'>{LeagueName}</span>
       </div>
 
       <div className="">
@@ -30,7 +27,9 @@ const Competitions = () => {
           <button style={{borderBottomWidth:  active ? '4px' : null,borderColor:'white'}} 
           onClick={()=>setActive(true)} className='text-xl pb-3 uppercase cursor-pointer'>Standings</button>
           <button style={{borderBottomWidth:  !active ? '4px' : null,borderColor:'white'}} 
-          onClick={()=>setActive(false)} className='text-xl pb-3 uppercase cursor-pointer'>matches</button>
+          onClick={()=>setActive(false)} className='text-xl pb-3 uppercase cursor-pointer'>Matches</button>
+          {/* <button style={{borderBottomWidth:  !active ? '4px' : null,borderColor:'white'}} 
+          onClick={()=>setActive(false)} className='text-xl pb-3 uppercase cursor-pointer'>Stats</button> */}
       </div>
       {active ? <Standings/>: <Matches/>}
   </div>

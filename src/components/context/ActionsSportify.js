@@ -1,7 +1,9 @@
 // import axios from 'axios'
+// require('dotenv').config()
 
-const FOOTBALL_API_URL = "http://api.football-data.org/v4/competitions"
-const FOOTBALL_API_TOKEN =  "45791bf74cd84c28aca251abe88efd6b"
+
+const FOOTBALL_API_URL = import.meta.env.FOOTBALL_API_URL
+const FOOTBALL_API_TOKEN =  import.meta.env.FOOTBALL_API_TOKEN
 
 // testing
 export const test = async () =>{

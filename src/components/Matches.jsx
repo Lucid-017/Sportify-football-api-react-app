@@ -13,7 +13,7 @@ const Matches = () => {
 },[])
   return loading ? <Spinner/>: (
     <>
-    <div className='py-4 '>
+    <div className='p-4 '>
       <p>Matchweek {matchday}</p>
       <HeadToHead/>
     </div>

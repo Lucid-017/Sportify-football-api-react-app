@@ -2,54 +2,50 @@ import React from 'react'
 import { useEffect } from 'react'
 import { useContext } from 'react'
 import SportifyContext from './context/SportifyContext'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Spinner from './Spinner'
 const Leagues = () => {
-    const {test,setSelectedLeagueName,loading,competitions,setSelectedLeague}=useContext(SportifyContext)
-
+    const {getData,setSelectedLeagueName,loading,competitions,setSelectedLeague}=useContext(SportifyContext)
+    const navigate = useNavigate()
         // const {position,team,playedGames,
         //       won,draw,lose,points,
         //       goalsFor,goalsAgainst}=standings
         // console.log(getStanding())
 
         useEffect(() => {
-         test()
+          getData()
         },[]);
 
-        // const filter =competitions.filter((competition)=>(
-        //  console.log(competition.area.id) 
-        // ))
-        
-      // console.log(test())
-    const renderer= competitions.map((competition)=>(
-      <Link to={`/competitions/${competition.id}`} key={competition.name}>
-        <div className=" h-3/4 " >
-            <div className="cursor-pointer shadow-xl hover:shadow-2xl
-             lg:p-8 md:p-10 sm:p-8 p-8 h-34 sm:h-30 md:h-36 lg:h-36" >
-         <div className="flex gap-3">
-         <div className="w-24 sm:w-24 md:w-30 lg:w-30 self-center md:self-auto lg:self-auto justify-self-center">
-           <img className='' src={competition.emblem} alt="emblem" />
-         </div>
-         <div className="league self-center" onClick={()=>
-         {setSelectedLeague(competition.code)
-         setSelectedLeagueName(competition.name)}
-        }>
-          
-            <p className='text-lg font-medium '>{competition.name}</p>
-            <p className='text-sm lg:text-xs'>{competition.area.name}</p>
-          
-         </div>
-         </div>
+        const handleNavigate =(competition)=>{
+            setSelectedLeague(competition.code)
+            setSelectedLeagueName(competition.name)
+            navigate(`/competitions/${competition.code}`)
+        }
+
+        const renderer = competitions.map(competition => (
+          competition.plan === 'TIER_ONE' && (
+            <div
+              key={competition.id}
+              onClick={() => handleNavigate(competition)}
+              className="cursor-pointer "
+            >
+              <div className="flex gap-4 items-center pb-4 md:pb-0 border-b-2 md:border-none">
+                <div className="">
+                  <img src={competition.emblem} alt={`${competition.name} Emblem`} className=" w-[10vw] min-w-16" />
+                </div>
+                <div className="flex flex-col justify-center">
+                  <p className="text-lg font-medium">{competition.name}</p>
+                  <p className="text-sm text-gray-500 lg:text-xs">{competition.area.name}</p>
+                </div>
+              </div>
+            </div>
+          )
+        ));
          
-      </div>
-        </div>
-        </Link>
-      
-    ))
     
-      return !loading ? <Spinner/>:(
+      return loading ? <Spinner/>:(
         
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-5'>
+        <div className='grid grid-cols-1 md:grid-cols-2 gap-5 my-10'>
           {renderer}
         </div>
         
