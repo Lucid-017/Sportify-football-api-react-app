@@ -2,18 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+
 body {
-  margin: 0;
+  box-sizing: border-box;
   font-family: 'poppins', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
 .animate{
   cursor: pointer;
   border-bottom: 2px solid #357AB9;
@@ -76,11 +73,4 @@ code {
 }
 .banner img{
   z-index: 9999999;
-}
-.check{
-  position: relative;
-  top: -50px;
-}
-.custom-shadow{
-  box-shadow: 0 .5rem 1rem rgba(0,0,0,.275);
 }

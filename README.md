@@ -11,3 +11,4 @@ create a simple node proxy server that talks to our react app, these server will
 encountered an issue access .env varaibles, at first i thought it was becasue i has no "proxy" varaible in my package.json but i accessed the token like ${token}, instead of process.env.tokenname
 
 i also istalled nodemon as a dev dependency and added it under the scripts - dev section in my package.json
+updated tailwindcss to make project more responsive

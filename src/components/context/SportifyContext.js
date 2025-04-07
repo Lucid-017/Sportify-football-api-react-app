@@ -51,12 +51,25 @@ export const SportifyProvider = ({ children }) => {
       });
 
       // log the filtered array
-      console.log("filtered array", filter);
+      console.log("filtered array", );
 
       setMatches(filter);
-    } catch (error) {}
-
+      localStorage.setItem("matches",JSON.stringify(filter))
+      setLoading(false)
+    } catch (error) {
+      // if getting matches fails, get from local storage
+      try {
+        const localStorageMatch = localStorage.getItem("matches")
+        if(localStorageMatch){
+          setMatches(localStorageMatch)
+        }
+        
+      } catch (error) {
+        console.log('could not get matches from local storage - ', error)
+      }
+    }
     setLoading(false);
+
   };
 
   return (
