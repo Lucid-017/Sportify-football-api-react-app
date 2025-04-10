@@ -4,12 +4,14 @@ import SportifyContext from "../context/SportifyContext";
 import Spinner from "../Spinner";
 import { useParams } from "react-router-dom";
 
+
 const Standings = () => {
   const [standings, setStandings] = useState([]);
+  const [fiveMatches, setFiveMatches] = useState([]);
   const [europestandings, setEuropestandings] = useState([]);
   const [loading, setLoading] = useState(true);
   const { name } = useParams(); // get selected league param
-  const { setSelectedLeague, selectedLeague,matches } = useContext(SportifyContext);
+  const { selectedLeague } = useContext(SportifyContext);
   console.log(selectedLeague);
 
   const getStanding = async () => {
@@ -30,14 +32,49 @@ const Standings = () => {
       const regularSeasonStandings = response.data.standings.find(
         (standing) => standing.stage === "REGULAR_SEASON"
       );
+      const standingsData = regularSeasonStandings
+      ? regularSeasonStandings.table
+      : [];
       setStandings(response.data.standings[0].table);
 
-      // for each team, fetch matches
-      const teamMatches =  standings.map( async (club)=> {
-        const response =await axios.get(`/api/teams/${club.team.id}/matches`)
-        console.log(response, 'Alll the matches we got')
-      })
-      console.log(teamMatches,'Alll the matches we got')
+      // only fetch for top 5 teams
+      const top5Teams = standingsData.slice(0, 1);
+      // for each team, fetch matches with rate limiting
+      const teamMatches = await Promise.all(
+        top5Teams.map(async (club)=>{
+          // create a token to hold all team matches by their id
+          const storageToken = `last5Matches_${club.team.id}`
+          try{
+            const response = await axios.get(`http://localhost:5000/api/teams/${club.team.id}/matches`)
+            console.log(response.data, `matches for ${club.team.name}`) //i cant see this
+            // store response in local storage
+            localStorage.setItem(storageToken,JSON.stringify({
+              team:club.team.name,
+              matches:response.data
+            }))
+
+            return {team:club.team.name , matches: response.data} 
+
+          }catch(err){
+            console.log(err, 'could not get matches for team')
+            // if apiCall fails, get from local storage
+            try {
+              const teamLc = localStorage.getItem(storageToken)
+              if(teamLc){
+                const parse = JSON.parse(teamLc)
+                console.log(parse, 'loaded team form from local storage')
+                return parse;
+              }   
+            } catch (error) {
+              console.log('Couldnt retrieve team form from local storage',error)
+            }
+
+            return { team: club.team.name, matches: [] };//fallback
+          }
+        })
+      )
+      console.log(teamMatches,'team matches') //this is retruning null, help
+      setFiveMatches(teamMatches);
 
       setLoading(false);
     } catch (error) {
@@ -59,12 +96,60 @@ const Standings = () => {
       setLoading(false);
     }
   };
+
+  
+
+    // utility to get last 5 matches for a team
+    // function getLast5Results(teamName, matchesData) {
+    //   if (!matchesData?.matches) return [];
+    
+    //   return matchesData.matches
+    //     .filter(match => match.status === "FINISHED")
+    //     .filter(match => match.homeTeam.name === teamName || match.awayTeam.name === teamName)
+    //     .sort((a, b) => new Date(b.utcDate) - new Date(a.utcDate)) // Newest first
+    //     .slice(0, 5)
+    //     .map(match => {
+    //       const isHome = match.homeTeam.name === teamName;
+    //       const teamGoals = isHome ? match.score.fullTime.home : match.score.fullTime.away;
+    //       const opponentGoals = isHome ? match.score.fullTime.away : match.score.fullTime.home;
+    
+    //       if (teamGoals > opponentGoals) return "W";
+    //       if (teamGoals < opponentGoals) return "L";
+    //       return "D";
+    //     });
+    // }
+    function getLast5Results(teamName, teamMatches) {
+      const teamData = teamMatches.find(t => t.team === teamName);
+      if (!teamData || !teamData.matches || !Array.isArray(teamData.matches.matches)) return [];
+    
+      return teamData.matches.matches
+        .filter(match => match.status === "FINISHED")
+        .sort((a, b) => new Date(a.utcDate) - new Date(b.utcDate))
+        .slice(-5)
+        .map(match => {
+          const isHome = match.homeTeam.name === teamName;
+          const teamGoals = isHome ? match.score.fullTime.home : match.score.fullTime.away;
+          const opponentGoals = isHome ? match.score.fullTime.away : match.score.fullTime.home;
+          
+          let result = "D"; // Default to Draw
+          if (teamGoals > opponentGoals) result = "W";
+          if (teamGoals < opponentGoals) result = "L";
+
+          return {
+            // return the match result and competition code
+            competition: match.competition.code,
+            result
+          }
+
+        });
+    }
+    
+
   // console.log('standings =========',standings)
   useEffect(() => {
     setLoading(false);
-    setSelectedLeague(selectedLeague);
+    // setSelectedLeague(selectedLeague);
     getStanding();
-    console.log('see matches wey we get',matches)
   }, [name]);
 
   const NotRegularSeasonCompetion = europestandings.map((item) => (
@@ -105,6 +190,8 @@ const Standings = () => {
       </div>
     </div>
   ));
+
+
   // normal competitions
   const regularSeason = standings.map((item) => (
     <tbody
@@ -144,9 +231,29 @@ const Standings = () => {
         <td className="p-3 text-sm text-gray-700 whitespace-nowrap">
           {item.points}
         </td>
+        <td className="p-3 text-sm whitespace-nowrap">
+  <div className="flex space-x-1">
+  {getLast5Results(item.team.name, fiveMatches).map((match, index) => (
+  // match.competition.code === selectedLeague && (
+    <span
+      key={index}
+      className={`
+        w-5 h-5 text-xs text-white font-bold rounded-full flex items-center justify-center
+        ${match.result === "W" ? "bg-green-500" : match.result === "L" ? "bg-red-500" : "bg-gray-400"}
+      `}
+    >
+      {match.result}
+    </span>
+  // )
+))}
+  </div>
+</td>
+
+
       </tr>
     </tbody>
   ));
+
 
   return loading ? (
     <Spinner />
@@ -189,9 +296,6 @@ const Standings = () => {
                     </th>
                     <th className="w-6 p-3 text-sm font-semibold tracking-wide text-left">
                       Last 5 games
-                      {/* to implement last 5 games i have to filter the last five games where team is with away or home, anc confirm winner for those games
-                      so first find the games
-                      then filter out the last 5 */}
                     </th>
                   </tr>
                 </thead>

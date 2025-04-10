@@ -11,4 +11,12 @@ create a simple node proxy server that talks to our react app, these server will
 encountered an issue access .env varaibles, at first i thought it was becasue i has no "proxy" varaible in my package.json but i accessed the token like ${token}, instead of process.env.tokenname
 
 i also istalled nodemon as a dev dependency and added it under the scripts - dev section in my package.json
+
+installing bottleneck for throttling and rate limiting request to the footbal api, fetching match data fro every team, we want to stay under the api limit 
+
 updated tailwindcss to make project more responsive
+
+Also when i refresh while in standings the whole thing breaks, need to figure that out
+add stats to show highest goal scorers of the league and any info that is avaialble 
+implement last 5 games
+revamp hoem ui with nav bar and other important attributes
