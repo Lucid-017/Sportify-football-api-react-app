@@ -13,7 +13,7 @@ app.use(cors()) //let frontend access this backend
 
 // allow 1 request per 4seconds
 const limiter = new Bottleneck({
-  minTime:6000, //4000 ms = 4s
+  minTime:6000, //6000 ms = 6s
   maxConcurrent:1 //only one request at a time
 })
 

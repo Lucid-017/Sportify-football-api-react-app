@@ -3,6 +3,7 @@ import { useState, useEffect, useContext } from "react";
 import SportifyContext from "../context/SportifyContext";
 import Spinner from "../Spinner";
 import { useParams } from "react-router-dom";
+import  './css/Standings.css'
 
 
 const Standings = () => {
@@ -12,6 +13,9 @@ const Standings = () => {
   const [loading, setLoading] = useState(true);
   const { name } = useParams(); // get selected league param
   const { selectedLeague } = useContext(SportifyContext);
+  // set active for filter
+  const [active, setActive] = useState('Full');
+  const tabs = ['Full','Short','Form']
   console.log(selectedLeague);
 
   const getStanding = async () => {
@@ -212,7 +216,20 @@ const Standings = () => {
             <p className="uppercase md:hidden">{item.team.tla}</p>
           </div>
         </td>
-        <td className="p-3 text-sm text-gray-700">{item.playedGames}</td>
+        {active === 'Short' && (
+          <>
+            <td className="p-3 text-sm text-gray-700">{item.playedGames}</td>
+            <td className="p-3 text-sm text-gray-700 whitespace-nowrap">
+          {item.goalsFor}
+        </td>
+        <td className="p-3 text-sm text-gray-700 whitespace-nowrap">
+          {item.points}
+        </td>
+          </>
+        )}
+        {active === 'Full' && (
+          <>
+                  <td className="p-3 text-sm text-gray-700">{item.playedGames}</td>
         <td className="p-3 text-sm text-gray-700 whitespace-nowrap">
           <p>{item.won}</p>
         </td>
@@ -222,10 +239,33 @@ const Standings = () => {
         <td className="p-3 text-sm text-gray-700 whitespace-nowrap">
           {item.lost}
         </td>
-        <td className="p-3 text-sm text-gray-700 whitespace-nowrap hidden">
+        <td className="p-3 text-sm text-gray-700 whitespace-nowrap">
           {item.goalsFor}
         </td>
-        <td className="p-3 text-sm text-gray-700 whitespace-nowrap hidden">
+        <td className="p-3 text-sm text-gray-700 whitespace-nowrap">
+          {item.goalsAgainst}
+        </td>
+        <td className="p-3 text-sm text-gray-700 whitespace-nowrap">
+          {item.points}
+        </td>
+          </>
+        )}
+        {active === 'Form' && (
+          <>
+                  <td className="p-3 text-sm text-gray-700">{item.playedGames}</td>
+        <td className="p-3 text-sm text-gray-700 whitespace-nowrap">
+          <p>{item.won}</p>
+        </td>
+        <td className="p-3 text-sm text-gray-700 whitespace-nowrap">
+          {item.draw}
+        </td>
+        <td className="p-3 text-sm text-gray-700 whitespace-nowrap">
+          {item.lost}
+        </td>
+        <td className="p-3 text-sm text-gray-700 whitespace-nowrap">
+          {item.goalsFor}
+        </td>
+        <td className="p-3 text-sm text-gray-700 whitespace-nowrap">
           {item.goalsAgainst}
         </td>
         <td className="p-3 text-sm text-gray-700 whitespace-nowrap">
@@ -248,8 +288,8 @@ const Standings = () => {
 ))}
   </div>
 </td>
-
-
+          </>
+        )}
       </tr>
     </tbody>
   ));
@@ -265,6 +305,16 @@ const Standings = () => {
         <>
           <div>
             <div className="overflow-x-auto lg:overflow-x-hidden md:overflow-x-hidden overflow-hidden  md:block px-2">
+              {/* filter */}
+              <div className="filter ">
+                <div className="flex text-white bg-gray-500 rounded-3xl items-center space-x-3 w-fit ">
+                  {tabs.map(tab => (
+                    <button key={tab} onClick={()=>setActive(tab)}
+                    className={`rounded-3xl transition duration-200 ${active === tab ? "bg-gray-300 px-2  font-semibold":"bg-gray-500 px-2 "}`}>{tab}</button>
+                  ))}
+                </div>
+              </div>
+              {/* table */}
               <table className="w-full">
                 <thead className="border-b border-gray-400 ">
                   <tr className="text-ash-900 font-semi-bold">
@@ -273,7 +323,22 @@ const Standings = () => {
                     <th className="w-40 pl-3 text-sm font-semibold tracking-wide text-left">
                       Team
                     </th>
-                    <th className="w-6  text-sm font-semibold tracking-wide text-left">
+                    {active === 'Short' && (
+                      <>
+                       <th className="w-6  text-sm font-semibold tracking-wide text-left">
+                      MP
+                    </th>
+                    <th className="w-6 p-3 text-sm font-semibold tracking-wide text-left">
+                      GF
+                    </th>
+                    <th className="w-6 p-3 text-sm font-semibold tracking-wide text-left">
+                      Pts
+                    </th>
+                      </>
+                    )}
+                    {active === 'Full' && (
+                      <>
+                      <th className="w-6  text-sm font-semibold tracking-wide text-left">
                       MP
                     </th>
                     <th className="w-6 p-3 text-sm font-semibold tracking-wide text-left">
@@ -285,18 +350,45 @@ const Standings = () => {
                     <th className="w-6 p-3 text-sm font-semibold tracking-wide text-left">
                       L
                     </th>
-                    <th className="w-6 p-3 text-sm font-semibold tracking-wide text-left hidden">
+                    <th className="w-6 p-3 text-sm font-semibold tracking-wide text-left">
                       GF
                     </th>
-                    <th className="w-6 p-3 text-sm font-semibold tracking-wide text-left hidden">
+                    <th className="w-6 p-3 text-sm font-semibold tracking-wide text-left">
+                      GA
+                    </th>
+                    <th className="w-6 p-3 text-sm font-semibold tracking-wide text-left">
+                      Pts
+                    </th>
+                      </>
+                    )}
+                    {active === 'Form' && (
+                      <>
+                      <th className="w-6  text-sm font-semibold tracking-wide text-left">
+                      MP
+                    </th>
+                    <th className="w-6 p-3 text-sm font-semibold tracking-wide text-left">
+                      W
+                    </th>
+                    <th className="w-6 p-3 text-sm font-semibold tracking-wide text-left">
+                      D
+                    </th>
+                    <th className="w-6 p-3 text-sm font-semibold tracking-wide text-left">
+                      L
+                    </th>
+                    <th className="w-6 p-3 text-sm font-semibold tracking-wide text-left">
+                      GF
+                    </th>
+                    <th className="w-6 p-3 text-sm font-semibold tracking-wide text-left">
                       GA
                     </th>
                     <th className="w-6 p-3 text-sm font-semibold tracking-wide text-left">
                       Pts
                     </th>
                     <th className="w-6 p-3 text-sm font-semibold tracking-wide text-left">
-                      Last 5 games
+                      Form
                     </th>
+                      </>
+                    )}
                   </tr>
                 </thead>
                 {regularSeason}

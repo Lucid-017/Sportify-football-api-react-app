@@ -19,4 +19,5 @@ updated tailwindcss to make project more responsive
 Also when i refresh while in standings the whole thing breaks, need to figure that out
 add stats to show highest goal scorers of the league and any info that is avaialble 
 implement last 5 games
+Added standing view base on tab selection, form,full and short
 revamp hoem ui with nav bar and other important attributes
