@@ -8,14 +8,14 @@ import { useContext } from 'react';
 
 
 const Competitions = () => {
-  const [active,setActive]= useState(true)
+  const [active,setActive]= useState('Standings')
   const {LeagueName}=useContext(SportifyContext)
   return (
 
-    <div className='p-5 md:px-10 '>
-      <div className="">
+    <div className='p-5 md:px-10 min-w-[300px] max-w-screen-laptop mx-auto '>
+      <div className=" flex items-center">
         <Link to={'/'}><p className='animate p-2'>All Competitions</p>  </Link>
-        /<span className='text-ash-900 px-2'>{LeagueName}</span>
+        /<p className='text-ash-900 px-2 hidden sm:block'>{LeagueName}</p>
       </div>
 
       <div className="">
@@ -24,14 +24,14 @@ const Competitions = () => {
         </p>
       </div>
       <div className="tabs text-white flex justify-around mt-5 bg-zest-500 pt-3">
-          <button style={{borderBottomWidth:  active ? '4px' : null,borderColor:'white'}} 
-          onClick={()=>setActive(true)} className='text-xl pb-3 uppercase cursor-pointer'>Standings</button>
-          <button style={{borderBottomWidth:  !active ? '4px' : null,borderColor:'white'}} 
-          onClick={()=>setActive(false)} className='text-xl pb-3 uppercase cursor-pointer'>Matches</button>
-          {/* <button style={{borderBottomWidth:  !active ? '4px' : null,borderColor:'white'}} 
-          onClick={()=>setActive(false)} className='text-xl pb-3 uppercase cursor-pointer'>Stats</button> */}
+        {['Standings','Matches'].map((tab,index)=>(
+          <>
+          <button key={index} className={`text-xl pb-3 uppercase cursor-pointer ${active===tab ? 'border-b-4 border-white' : ''}`}
+          onClick={()=>setActive(tab)}>{tab}</button>
+          </>
+        ))}
       </div>
-      {active ? <Standings/>: <Matches/>}
+      {active === 'Standings' ? <Standings/> : active === 'Matches' ? <Matches/>: null}
   </div>
       
     

@@ -16,7 +16,7 @@ const Standings = () => {
   // set active for filter
   const [active, setActive] = useState('Full');
   const tabs = ['Full','Short','Form']
-  console.log(selectedLeague);
+
 
   const getStanding = async () => {
     setLoading(true);
@@ -101,6 +101,10 @@ const Standings = () => {
     }
   };
 
+  // if(w < 640) {
+  //   console.log('mobile')
+  //   setActive('Short')
+  // }
   
 
     // utility to get last 5 matches for a team
@@ -155,6 +159,27 @@ const Standings = () => {
     // setSelectedLeague(selectedLeague);
     getStanding();
   }, [name]);
+
+  useEffect(()=>{
+    function handleResize() {
+      const width = window.innerWidth;
+      if(width <=600){
+        setActive('Short')
+      }else if(width >601  && width <= 941){
+        setActive('Full')}
+      else if(width > 942){
+        setActive('Form')
+      }
+    }
+
+    handleResize()
+    // 
+    window.addEventListener('resize', handleResize);
+    // Cleanup the event listener on component unmount
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  },[])
 
   const NotRegularSeasonCompetion = europestandings.map((item) => (
     <div className="rounded custom-shadow mt-5 mb-8 p-5">
@@ -298,13 +323,13 @@ const Standings = () => {
   return loading ? (
     <Spinner />
   ) : (
-    <div className="p-4">
+    <div className="p-5 md:px-10">
       {selectedLeague === "CL" || selectedLeague === "EC" ? ( //if the selected league is champions league, the table will be a different format
         <div className="">{NotRegularSeasonCompetion}</div>
       ) : (
         <>
           <div>
-            <div className="overflow-x-auto lg:overflow-x-hidden md:overflow-x-hidden overflow-hidden  md:block px-2">
+            <div className=" overflow-x-auto lg:overflow-x-hidden md:overflow-x-hidden overflow-hidden  md:block px-2">
               {/* filter */}
               <div className="filter ">
                 <div className="flex text-white bg-gray-500 rounded-3xl items-center space-x-3 w-fit ">
