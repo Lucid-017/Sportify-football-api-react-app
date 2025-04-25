@@ -1,8 +1,8 @@
 import { createContext, useState } from "react";
 import axios from "axios";
 
-const SportifyContext = createContext();
 
+const SportifyContext = createContext();
 export const SportifyProvider = ({ children }) => {
   const FOOTBALL_API_URL = process.env.REACT_APP_FOOTBALL_API_URL;
   const FOOTBALL_API_TOKEN = process.env.REACT_APP_FOOTBALL_API_TOKEN;
@@ -15,7 +15,7 @@ export const SportifyProvider = ({ children }) => {
   const [LeagueName, setSelectedLeagueName] = useState([]);
   const area_ids = [2072, 2114, 2163, 2077, 2081, 2088, 2187, 2224];
 
-  const urlCompetitions = 'http://localhost:5000/api/competitions'
+  const urlCompetitions = process.env.REACT_APP_FOOTBALL_API_URL + "/api/competitions";
   const getData = async () => {
     setLoading(true);
     try {
