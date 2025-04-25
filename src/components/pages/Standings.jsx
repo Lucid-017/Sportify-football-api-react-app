@@ -23,7 +23,7 @@ const Standings = () => {
     console.log(name, "standing param");
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/competitions/${selectedLeague}/standings`
+        `${process.env.REACT_APP_FOOTBALL_API_URL}/api/competitions/${selectedLeague}/standings`
       );
       // console.log(response)
       setEuropestandings(response.data.standings[0].table);
@@ -49,7 +49,7 @@ const Standings = () => {
           // create a token to hold all team matches by their id
           const storageToken = `last5Matches_${club.team.id}`
           try{
-            const response = await axios.get(`http://localhost:5000/api/teams/${club.team.id}/matches`)
+            const response = await axios.get(`${process.env.REACT_APP_FOOTBALL_API_URL}/api/teams/${club.team.id}/matches`)
             console.log(response.data, `matches for ${club.team.name}`) //i cant see this
             // store response in local storage
             localStorage.setItem(storageToken,JSON.stringify({
