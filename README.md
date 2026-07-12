@@ -289,3 +289,31 @@ played, assists, goals), available as a "Stats" tab on every competition.
   used elsewhere (e.g. a competition whose season hasn't started yet, like
   the Premier League right now, simply has no scorers — shown as "No scorer
   data available yet." instead of a blank table).
+
+### 6. Vercel deploy gotcha: `CI=true` turns ESLint warnings into build failures
+
+Pushing this branch to Vercel failed with `Command "npm run build" exited
+with 1`, even though `npm run build` succeeds locally. Reason: Vercel (like
+most CI providers) sets `CI=true` in its build environment, and
+Create React App's build script treats **every ESLint warning as a hard
+error** whenever `CI` is set — a `no-unused-vars` or
+`react-hooks/exhaustive-deps` warning that's harmless in local dev
+(`npm start`) is fatal in CI. Reproduced locally with
+`CI=true npx react-scripts build` to confirm, then fixed each one:
+
+- `App.js` / `Leagues.jsx` had genuinely unused imports (`Matches`, `Link`)
+  — removed.
+- Five `react-hooks/exhaustive-deps` warnings, all on the same shape of
+  effect: `useEffect(() => { getX() }, [])`, meant to run once on mount.
+  ESLint wants `getX` (and whatever it closes over) listed as a dependency,
+  but `getX` is a plain function defined fresh in the body of
+  `SportifyProvider` on every render — it's not wrapped in `useCallback`, so
+  its identity changes on every context render. Satisfying the rule as
+  written would make these effects re-run on every context render instead
+  of once per mount, undoing the tab-switch caching from section 3.
+  Suppressed with `// eslint-disable-next-line react-hooks/exhaustive-deps`
+  on each one instead, with a comment explaining why.
+
+`CI=true npx react-scripts build` now compiles successfully — this is the
+command to re-run locally before pushing if this class of warning creeps
+back in.

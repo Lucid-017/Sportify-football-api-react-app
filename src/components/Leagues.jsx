@@ -2,7 +2,7 @@ import React from 'react'
 import { useEffect } from 'react'
 import { useContext } from 'react'
 import SportifyContext from './context/SportifyContext'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import Spinner from './Spinner'
 const Leagues = () => {
     const {getData,setSelectedLeagueName,loading,competitions,setSelectedLeague}=useContext(SportifyContext)
@@ -14,6 +14,8 @@ const Leagues = () => {
 
         useEffect(() => {
           getData()
+          // run once on mount; getData() is cache-guarded in context, adding it here would re-run this effect on every context render since it's a fresh function reference each time
+          // eslint-disable-next-line react-hooks/exhaustive-deps
         },[]);
 
         const handleNavigate =(competition)=>{

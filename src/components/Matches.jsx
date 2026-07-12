@@ -10,6 +10,8 @@ const Matches = () => {
    useEffect(()=>{
     setSelectedLeague(selectedLeague)
     getMatches()
+    // run once on mount; getMatches() is cache-guarded in context, adding it here would re-run this effect on every context render since it's a fresh function reference each time
+    // eslint-disable-next-line react-hooks/exhaustive-deps
 },[])
 
   // matchday numbers observed in the already-fetched season (knockout
