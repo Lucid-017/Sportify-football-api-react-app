@@ -87,6 +87,26 @@ app.get('/api/competitions/:name/matches',async(req,res)=>{
           res.status(error.response?.status || 500).json({error:"Something went wrong",error})
         }
 })
+// GET TOP SCORERS
+app.get('/api/competitions/:name/scorers',async(req,res)=>{
+    const {name}=req.params;
+        try {
+            const response = await axios.get(
+                `${process.env.REACT_APP_FOOTBALL_API_URL}/${name}/scorers`,
+                {
+                  params: { limit: 10 },
+                  headers: {
+                    "X-Auth-Token": process.env.REACT_APP_FOOTBALL_API_TOKEN,
+                  },
+                }
+              );
+            //   parse data
+            res.json(response.data)
+        } catch (error) {
+          // if get data fails
+          res.status(error.response?.status || 500).json({error:"Something went wrong",error})
+        }
+})
 // GET team MATCHES
 app.get('/api/teams/:teamID/matches',async(req,res)=>{
     const {teamID}=req.params;

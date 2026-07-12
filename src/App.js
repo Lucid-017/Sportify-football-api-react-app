@@ -11,16 +11,20 @@ function App() {
   return (
     <SportifyProvider>
       <Router>
-      <Banner/>
-      <Routes>
-          <Route path="/competitions/:name" element={<Competitions/>}/>
-          <Route path="/" element={<Home/>}/>
-          <Route path="*" element={<NotFound/>}/>
-      </Routes>  
-      <Footer/>
-    </Router>
+        <div className="min-h-screen flex flex-col">
+          <Banner/>
+          <main className="flex-1">
+            <Routes>
+                <Route path="/competitions/:name" element={<Competitions/>}/>
+                <Route path="/" element={<Home/>}/>
+                <Route path="*" element={<NotFound/>}/>
+            </Routes>
+          </main>
+          <Footer/>
+        </div>
+      </Router>
     </SportifyProvider>
-    
+
   );
 }
 

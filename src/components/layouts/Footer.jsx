@@ -2,18 +2,32 @@ import React from 'react'
 
 const Footer = () => {
   return (
-    <div className='w-2/4 mx-auto text-center my-8'>
-      <p ><span className='text-ash-800'>Built by  : </span>
-         <a className='animate' target='_blank' rel='noreferrer' href="https://twitter.com/UchennaOnwuliri">
-          Onwuliri Uchenna Austin
-        </a>
-      </p>
-      <p className='text-sm mt-2'>Credits:
-        <a className='animate' target='_blank' rel='noreferrer' href="https://www.football-data.org/">
-          Football data API
-        </a>
-      </p>
-    </div>
+    <footer className="mt-16 bg-Darkblue-800">
+      <div className="max-w-screen-desktop mx-auto px-5 py-8 text-center">
+        <p className="text-ash-200 text-sm">
+          Built by{' '}
+          <a
+            className="animate text-white font-medium"
+            target="_blank"
+            rel="noreferrer"
+            href="https://twitter.com/UchennaOnwuliri"
+          >
+            Onwuliri Uchenna Austin
+          </a>
+        </p>
+        <p className="text-ash-400 text-xs mt-2">
+          Data provided by{' '}
+          <a
+            className="animate text-ash-200"
+            target="_blank"
+            rel="noreferrer"
+            href="https://www.football-data.org/"
+          >
+            football-data.org
+          </a>
+        </p>
+      </div>
+    </footer>
   )
 }
 
