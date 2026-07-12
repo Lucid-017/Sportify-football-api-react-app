@@ -2,23 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
-
 body {
   box-sizing: border-box;
-  font-family: 'poppins', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Poppins', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #f5f5f6;
 }
 
-.animate{
+/* underline-fill hover effect for inline text links */
+.animate {
   cursor: pointer;
-  border-bottom: 2px solid #357AB9;
+  border-bottom: 2px solid #dd7c00;
   display: inline;
   position: relative;
-  
+  transition: color 0.15s ease;
 }
-.animate::before{
+.animate::before {
   content: '';
   position: absolute;
   bottom: 0;
@@ -26,51 +26,26 @@ body {
   width: 100%;
   height: 0%;
   z-index: -1;
-  background: #357AB9;
-  border-radius: 1% 1% 0 0;
-  transition: 0.1s;
+  background: #dd7c00;
+  border-radius: 2px 2px 0 0;
+  transition: height 0.15s ease;
 }
-.animate:hover::before{
+.animate:hover::before {
   height: 100%;
+}
+.animate:hover {
   color: white;
+}
 
+/* thin, unobtrusive scrollbar for horizontally-scrollable tables */
+.thin-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #cbccd3 transparent;
 }
-.animate:hover{
-  height: 100%;
-  color: white;
-
+.thin-scrollbar::-webkit-scrollbar {
+  height: 6px;
 }
-/* .banner img {
-  z-index: -9999;
-  height: 35vh;
-  width: 100%;
-  position: absolute;
-  background-repeat: no-repeat;
-  background-size: contain;
-  align-items: center;
-  justify-content: center;
-} */
-.banner {
-  background-image: url(./components/assets/bg-football.2d1b7b03.jpg);
-  position: relative;
-  min-height: 300px;
-  background-position: 50%;
-  background-size: cover;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: end;
-  -ms-flex-pack: end;
-  justify-content: flex-end;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  text-align: center;
-}
-.banner img{
-  z-index: 9999999;
+.thin-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #cbccd3;
+  border-radius: 999px;
 }

@@ -27,29 +27,27 @@ const Leagues = () => {
             <div
               key={competition.id}
               onClick={() => handleNavigate(competition)}
-              className="cursor-pointer pb-4 border-b-2 border-gray-300"
+              className="cursor-pointer rounded-lg border border-gray-200 p-4 flex gap-4 items-center transition-all hover:border-zest-400 hover:shadow-md hover:-translate-y-0.5"
             >
-              <div className="flex gap-4 items-center ">
-                <div className="">
-                  <img src={competition.emblem} alt={`${competition.name} Emblem`} className=" w-[7vw] min-w-12" />
-                </div>
-                <div className="flex flex-col justify-center">
-                  <p className="text-lg font-medium">{competition.name}</p>
-                  <p className="text-sm text-gray-500 lg:text-xs">{competition.area.name}</p>
-                </div>
+              <div className="shrink-0 w-14 h-14 flex items-center justify-center rounded-full bg-ash-100">
+                <img src={competition.emblem} alt={`${competition.name} Emblem`} className="w-10 h-10 object-contain" />
+              </div>
+              <div className="flex flex-col justify-center min-w-0">
+                <p className="text-base font-medium text-Darkblue-800 truncate">{competition.name}</p>
+                <p className="text-sm text-ash-800">{competition.area.name}</p>
               </div>
             </div>
           )
         ));
-         
-    
+
+
       return loading ? <Spinner/>:(
-        
-        <div className='grid grid-cols-1 md:grid-cols-2 gap-5 my-10 mx-auto'>
+
+        <div className='grid grid-cols-1 md:grid-cols-2 gap-4 mx-auto'>
           {renderer}
         </div>
-        
-        
+
+
       )
 }
 
