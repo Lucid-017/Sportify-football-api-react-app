@@ -25,7 +25,7 @@ const Stats = () => {
       ) : (
         <div className="overflow-x-auto thin-scrollbar rounded-lg border border-gray-200">
           <table className="w-full">
-            <thead className="border-b-2 border-Darkblue-500 bg-ash-50">
+            <thead className="border-b-2 border-Darkblue-500 bg-ash-600">
               <tr className="text-ash-800 font-semibold">
                 <th className="w-6 p-3 text-sm text-left"></th>
                 <th className="pl-3 text-sm font-semibold tracking-wide text-left">Player</th>
@@ -37,7 +37,7 @@ const Stats = () => {
             </thead>
             <tbody className="divide-y divide-gray-100">
               {scorers.map((entry, index) => (
-                <tr key={entry.player.id} className="even:bg-ash-50 hover:bg-zest-50 transition-colors">
+                <tr key={entry.player.id} className="even:bg-ash-600/40 hover:bg-zest-50 transition-colors">
                   <td className="p-3 text-sm text-ash-800 font-medium">{index + 1}</td>
                   <td className="flex items-center p-3 text-sm text-Darkblue-800 whitespace-nowrap">
                     <img src={entry.team.crest} className="w-6 h-6 object-contain shrink-0" alt={entry.team.name} />

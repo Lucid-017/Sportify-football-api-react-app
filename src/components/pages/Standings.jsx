@@ -133,7 +133,7 @@ const Standings = () => {
           </thead>
           <tbody className="divide-y divide-gray-100">
             {group.table.map((item) => (
-              <tr key={item.position} className="even:bg-ash-50 hover:bg-zest-50 transition-colors">
+              <tr key={item.position} className="even:bg-ash-600/40 hover:bg-zest-50 transition-colors">
                 <td className="p-3 text-sm text-ash-800 font-medium whitespace-nowrap">{item.position}</td>
                 <td className="flex items-center p-3 text-sm text-Darkblue-800 whitespace-nowrap">
                   <img src={item.team.crest} className="w-6 h-6 object-contain shrink-0" alt="emblem" />
@@ -161,7 +161,7 @@ const Standings = () => {
       className="divide-y divide-gray-100"
       key={item.position}
     >
-      <tr className="even:bg-ash-50 hover:bg-zest-50 transition-colors">
+      <tr className="even:bg-ash-600/40 hover:bg-zest-50 transition-colors">
         <td className="p-3 text-sm text-ash-800 whitespace-nowrap font-medium">
           <p>{item.position}</p>
         </td>
@@ -274,7 +274,7 @@ const Standings = () => {
             <div className="px-1">
               {/* filter */}
               <div className="filter mb-4">
-                <div className="inline-flex bg-ash-100 rounded-full items-center p-1 gap-1">
+                <div className="inline-flex bg-ash-600 rounded-full items-center p-1 gap-1">
                   {tabs.map(tab => (
                     <button key={tab} onClick={()=>setActive(tab)}
                     className={`rounded-full transition duration-200 px-4 py-1.5 text-sm font-medium ${active === tab ? "bg-Darkblue-800 text-white shadow-sm":"text-ash-800 hover:text-Darkblue-800"}`}>{tab}</button>
@@ -285,7 +285,7 @@ const Standings = () => {
             <div className="overflow-x-auto thin-scrollbar rounded-lg border border-gray-200">
               {/* table */}
               <table className="w-full">
-                <thead className="border-b-2 border-Darkblue-500 bg-ash-50">
+                <thead className="border-b-2 border-Darkblue-500 bg-ash-600">
                   <tr className="text-ash-900 font-semi-bold">
                     <th className="w-6 text-sm "></th>
                     {/*  --tracking-wide */}

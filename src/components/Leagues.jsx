@@ -31,7 +31,7 @@ const Leagues = () => {
               onClick={() => handleNavigate(competition)}
               className="cursor-pointer rounded-lg border border-gray-200 p-4 flex gap-4 items-center transition-all hover:border-zest-400 hover:shadow-md hover:-translate-y-0.5"
             >
-              <div className="shrink-0 w-14 h-14 flex items-center justify-center rounded-full bg-ash-100">
+              <div className="shrink-0 w-14 h-14 flex items-center justify-center rounded-full bg-ash-600">
                 <img src={competition.emblem} alt={`${competition.name} Emblem`} className="w-10 h-10 object-contain" />
               </div>
               <div className="flex flex-col justify-center min-w-0">

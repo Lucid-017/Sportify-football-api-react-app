@@ -14,14 +14,14 @@ const MatchCard = ({ match }) => {
   const winner = !hasScore ? null : homeGoals > awayGoals ? 'home' : awayGoals > homeGoals ? 'away' : 'draw'
 
   const scoreColor = (side) => {
-    if (!hasScore) return 'text-ash-400'
+    if (!hasScore) return 'text-ash-700'
     if (winner === 'draw') return 'text-ash-800'
     return winner === side ? 'text-Limegreen-600' : 'text-red-500'
   }
 
   const nameClass = (side) => {
     if (!hasScore || winner === 'draw') return 'text-Darkblue-800 font-medium'
-    return winner === side ? 'text-Darkblue-900 font-semibold' : 'text-ash-500 font-normal'
+    return winner === side ? 'text-Darkblue-900 font-semibold' : 'text-ash-700 font-normal'
   }
 
   return (
@@ -33,7 +33,7 @@ const MatchCard = ({ match }) => {
               {match.homeTeam?.crest ? (
                 <img className="w-6 h-6 object-contain shrink-0" src={match.homeTeam.crest} alt={homeName} />
               ) : (
-                <span className="w-6 h-6 rounded-full bg-ash-100 shrink-0" />
+                <span className="w-6 h-6 rounded-full bg-ash-600 shrink-0" />
               )}
               <p className={`self-center ${nameClass('home')}`}>{homeName}</p>
               {winner === 'home' && <span className="text-Limegreen-600 text-xs font-bold">●</span>}
@@ -44,7 +44,7 @@ const MatchCard = ({ match }) => {
               {match.awayTeam?.crest ? (
                 <img className="w-6 h-6 object-contain shrink-0" src={match.awayTeam.crest} alt={awayName} />
               ) : (
-                <span className="w-6 h-6 rounded-full bg-ash-100 shrink-0" />
+                <span className="w-6 h-6 rounded-full bg-ash-600 shrink-0" />
               )}
               <p className={`self-center ${nameClass('away')}`}>{awayName}</p>
               {winner === 'away' && <span className="text-Limegreen-600 text-xs font-bold">●</span>}
@@ -66,7 +66,7 @@ const MatchCard = ({ match }) => {
             </div>
           </div>
         ) : (
-          <div className="scores text-ash-400 text-sm font-medium self-center">
+          <div className="scores text-ash-700 text-sm font-medium self-center">
             <p>vs</p>
           </div>
         )}
@@ -74,7 +74,7 @@ const MatchCard = ({ match }) => {
           {match.status === "FINISHED" ? (
             <span className="inline-block px-1.5 py-0.5 rounded text-xs font-semibold text-white bg-zest-500">FT</span>
           ) : (
-            <span className="inline-block px-1.5 py-0.5 rounded text-xs font-semibold text-ash-800 bg-ash-100">
+            <span className="inline-block px-1.5 py-0.5 rounded text-xs font-semibold text-ash-800 bg-ash-600">
               {match.status === 'IN_PLAY' || match.status === 'PAUSED' ? 'LIVE' : 'Scheduled'}
             </span>
           )}

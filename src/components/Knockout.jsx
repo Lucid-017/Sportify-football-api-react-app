@@ -65,7 +65,7 @@ const Knockout = () => {
                 className={`text-xs font-semibold px-2.5 py-1 rounded-full whitespace-nowrap ${
                   reachedStages.has(stage)
                     ? 'bg-Darkblue-800 text-white'
-                    : 'bg-ash-100 text-ash-500'
+                    : 'bg-ash-600 text-ash-900'
                 }`}
               >
                 {STAGE_LABELS[stage]}
